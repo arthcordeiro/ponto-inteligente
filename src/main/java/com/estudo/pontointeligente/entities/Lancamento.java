@@ -12,8 +12,8 @@ public class Lancamento implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "data", nullable = false)
-    private Date data;
+    @Column(name = "data_lancamento", nullable = false)
+    private Date dataLancamento;
     @Column(name = "descricao", nullable = false)
     private String descricao;
     @Column(name = "localizacao", nullable = false)
@@ -39,11 +39,11 @@ public class Lancamento implements Serializable {
     }
 
     public Date getData() {
-        return data;
+        return dataLancamento;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void setData(Date dataLancamento) {
+        this.dataLancamento = dataLancamento;
     }
 
     public String getDescricao() {
