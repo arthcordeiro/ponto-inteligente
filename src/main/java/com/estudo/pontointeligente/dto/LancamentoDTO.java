@@ -1,36 +1,23 @@
-package com.estudo.pontointeligente.entities;
+package com.estudo.pontointeligente.dto;
 
+import com.estudo.pontointeligente.entities.Funcionario;
 import com.estudo.pontointeligente.enums.TipoEnum;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
-import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
-@Entity
-@Table(name = "lancamento")
-public class Lancamento implements Serializable {
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+public class LancamentoDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "data_lancamento", nullable = false)
     private Date dataLancamento;
-    @Column(name = "descricao", nullable = false)
     private String descricao;
-    @Column(name = "localizacao", nullable = false)
     private String localizacao;
-    @Column(name = "data_criacao", nullable = false)
     private Date dataCriacao;
-    @Column(name = "data_atualizacao", nullable = false)
     private Date dataAtualizacao;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "tipo", nullable = false)
     private TipoEnum tipo;
-    @ManyToOne(fetch = FetchType.EAGER)
     private Funcionario funcionario;
-
-    public Lancamento() {}
 
     public Long getId() {
         return id;
@@ -40,11 +27,11 @@ public class Lancamento implements Serializable {
         this.id = id;
     }
 
-    public Date getData() {
+    public Date getDataLancamento() {
         return dataLancamento;
     }
 
-    public void setData(Date dataLancamento) {
+    public void setDataLancamento(Date dataLancamento) {
         this.dataLancamento = dataLancamento;
     }
 
@@ -94,17 +81,5 @@ public class Lancamento implements Serializable {
 
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
-    }
-
-    @PreUpdate
-    public void preUpdate(){
-        this.dataAtualizacao = new Date();
-    }
-
-    @PrePersist
-    public void prePersist(){
-        final Date atual = new Date();
-        this.dataCriacao = atual;
-        this.dataAtualizacao = atual;
     }
 }

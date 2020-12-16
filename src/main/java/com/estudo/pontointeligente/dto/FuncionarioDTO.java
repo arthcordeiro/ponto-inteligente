@@ -1,49 +1,31 @@
-package com.estudo.pontointeligente.entities;
+package com.estudo.pontointeligente.dto;
 
+import com.estudo.pontointeligente.entities.Empresa;
+import com.estudo.pontointeligente.entities.Lancamento;
 import com.estudo.pontointeligente.enums.PerfilEnum;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
-import javax.persistence.*;
-import javax.swing.text.html.Option;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
-@Entity
-@Table(name = "funcionario")
-public class Funcionario implements Serializable {
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+public class FuncionarioDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "name", nullable = false)
     private String name;
-    @Column(name = "email", nullable = false)
     private String email;
-    @Column(name = "cpf", nullable = false)
     private String cpf;
-    @Column(name = "valor_hora", nullable = false)
     private BigDecimal valorHora;
-    @Column(name = "qtd_hora_trabalho_dia", nullable = false)
     private Float qtdHoraTrabalhoDia;
-    @Column(name = "qtd_hora_almoco", nullable = false)
     private Float qtdHoraAlmoco;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "perfil", nullable = false)
     private PerfilEnum perfil;
-    @Column(name = "senha", nullable = false)
     private String senha;
-    @Column(name = "data_criacao", nullable = false)
     private Date dataCriacao;
-    @Column(name = "data_atualizacao", nullable = false)
     private Date dataAtualizacao;
-    @ManyToOne(fetch = FetchType.EAGER)
     private Empresa empresa;
-    @OneToMany(mappedBy = "funcionario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Lancamento> lancamentos;
-
-    public Funcionario() {}
 
     public Long getId() {
         return id;
@@ -109,6 +91,14 @@ public class Funcionario implements Serializable {
         this.perfil = perfil;
     }
 
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
     public Date getDataCriacao() {
         return dataCriacao;
     }
@@ -139,35 +129,5 @@ public class Funcionario implements Serializable {
 
     public void setLancamentos(List<Lancamento> lancamentos) {
         this.lancamentos = lancamentos;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    @PreUpdate
-    public void preUpdate(){
-        this.dataAtualizacao = new Date();
-    }
-
-    @PrePersist
-    public void prePersist(){
-        final Date atual = new Date();
-        this.dataCriacao = atual;
-        this.dataAtualizacao = atual;
-    }
-
-    @Transient
-    public Optional<BigDecimal> getValorHoraOpt() {
-        return Optional.ofNullable(valorHora);
-    }
-
-    @Transient
-    public Optional<Float> getQtdHoraTrabalhoDiaOpt() {
-        return Optional.ofNullable(qtdHoraTrabalhoDia);
     }
 }
