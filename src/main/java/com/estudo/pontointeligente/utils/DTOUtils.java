@@ -2,9 +2,12 @@ package com.estudo.pontointeligente.utils;
 
 import com.estudo.pontointeligente.dto.EmpresaDTO;
 import com.estudo.pontointeligente.dto.FuncionarioDTO;
+import com.estudo.pontointeligente.dto.LancamentoDTO;
 import com.estudo.pontointeligente.entities.Empresa;
 import com.estudo.pontointeligente.entities.Funcionario;
+import com.estudo.pontointeligente.entities.Lancamento;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
 
 public class DTOUtils {
 
@@ -39,4 +42,19 @@ public class DTOUtils {
         return this.modelMapper.map(funcionario, FuncionarioDTO.class);
     }
 
+    //Converter Lancamento DTO to entity
+    public Lancamento dtoToLancamento(LancamentoDTO dto) {
+        return this.modelMapper.map(dto, Lancamento.class);
+    }
+
+    //Converter Lancamento entity to DTO
+    public LancamentoDTO lancamentoToDto(Lancamento lancamento){
+        return this.modelMapper.map(lancamento, LancamentoDTO.class);
+    }
+
+    //Converter Page<Lancamento> to Page<LancamentoDTO>
+    public Page<LancamentoDTO> toPageLancamentoDto(Page<Lancamento> objects) {
+        Page<LancamentoDTO> dtos  = objects.map(this::lancamentoToDto);
+        return dtos;
+    }
 }

@@ -40,14 +40,6 @@ public class Lancamento implements Serializable {
         this.id = id;
     }
 
-    public Date getData() {
-        return dataLancamento;
-    }
-
-    public void setData(Date dataLancamento) {
-        this.dataLancamento = dataLancamento;
-    }
-
     public String getDescricao() {
         return descricao;
     }
@@ -82,6 +74,13 @@ public class Lancamento implements Serializable {
 
     public TipoEnum getTipo() {
         return tipo;
+    }
+    public Date getDataLancamento() {
+        return dataLancamento;
+    }
+
+    public void setDataLancamento(Date dataLancamento) {
+        this.dataLancamento = dataLancamento;
     }
 
     public void setTipo(TipoEnum tipo) {

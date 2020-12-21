@@ -76,7 +76,7 @@ public class LancamentoRepositoryTest {
 
     private Lancamento obterDadosLancamentos(Funcionario funcionario) {
         Lancamento lancameto = new Lancamento();
-        lancameto.setData(new Date());
+        lancameto.setDataLancamento(new Date());
         lancameto.setTipo(TipoEnum.INICIO_ALMOCO);
         lancameto.setFuncionario(funcionario);
         return lancameto;
