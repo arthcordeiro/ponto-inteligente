@@ -15,7 +15,7 @@ import java.util.Optional;
 public class Funcionario implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "name", nullable = false)
     private String name;
@@ -25,9 +25,9 @@ public class Funcionario implements Serializable {
     private String cpf;
     @Column(name = "valor_hora", nullable = false)
     private BigDecimal valorHora;
-    @Column(name = "qtd_hora_trabalho_dia", nullable = false)
+    @Column(name = "qtd_horas_trabalho_dia", nullable = false)
     private Float qtdHoraTrabalhoDia;
-    @Column(name = "qtd_hora_almoco", nullable = false)
+    @Column(name = "qtd_horas_almoco", nullable = false)
     private Float qtdHoraAlmoco;
     @Enumerated(EnumType.STRING)
     @Column(name = "perfil", nullable = false)

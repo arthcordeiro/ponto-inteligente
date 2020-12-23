@@ -1,6 +1,5 @@
 package com.estudo.pontointeligente.services;
 
-import com.estudo.pontointeligente.dto.LancamentoDTO;
 import com.estudo.pontointeligente.entities.Lancamento;
 import com.estudo.pontointeligente.respositories.LancamentoRepository;
 import org.junit.Assert;
@@ -8,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -43,19 +41,19 @@ public class LancamentoServiceTest {
 
     @Test
     public void testFindLancamentoByFuncionarioId() {
-        Page<LancamentoDTO> lancamento = this.lancamentoService.findByFuncionarioId(1L, PageRequest.of(0, 10));
+        Page<Lancamento> lancamento = this.lancamentoService.findByFuncionarioId(1L, PageRequest.of(0, 10));
         Assert.assertNotNull(lancamento);
     }
 
     @Test
     public void testFindLancamentoById() {
-        Optional<LancamentoDTO> lancamento = this.lancamentoService.findById(1l);
+        Optional<Lancamento> lancamento = this.lancamentoService.findById(1l);
         Assert.assertNotNull(lancamento);
     }
 
     @Test
     public void testSalvarLancaento() {
-        LancamentoDTO lancamento = this.lancamentoService.save(new LancamentoDTO());
+        Lancamento lancamento = this.lancamentoService.save(new Lancamento());
         Assert.assertNotNull(lancamento);
     }
 }

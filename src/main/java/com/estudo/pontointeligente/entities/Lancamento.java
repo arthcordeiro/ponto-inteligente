@@ -11,7 +11,7 @@ import java.util.Date;
 public class Lancamento implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_lancamento", nullable = false)

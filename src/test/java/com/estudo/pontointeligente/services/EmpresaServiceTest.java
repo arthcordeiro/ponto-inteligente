@@ -1,6 +1,5 @@
 package com.estudo.pontointeligente.services;
 
-import com.estudo.pontointeligente.dto.EmpresaDTO;
 import com.estudo.pontointeligente.entities.Empresa;
 import com.estudo.pontointeligente.respositories.EmpresaRepository;
 import org.junit.Assert;
@@ -8,14 +7,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.ui.ModelExtensionsKt;
 
 import java.util.Optional;
 
@@ -39,13 +36,13 @@ public class EmpresaServiceTest {
 
     @Test
     public void testBuscarEmpresaPorCnpj() {
-        Optional<EmpresaDTO> empresa = this.empresaService.findByCnpj(CNPJ);
+        Optional<Empresa> empresa = this.empresaService.findByCnpj(CNPJ);
         Assert.assertTrue(empresa.isPresent());
     }
 
     @Test
     public void testPersistirEmpresa() {
-        EmpresaDTO empresa = this.empresaService.save(new EmpresaDTO());
+        Empresa empresa = this.empresaService.save(new Empresa());
         Assert.assertNotNull(empresa);
     }
 }

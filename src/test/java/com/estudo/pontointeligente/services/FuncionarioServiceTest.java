@@ -1,10 +1,7 @@
 package com.estudo.pontointeligente.services;
 
-import com.estudo.pontointeligente.dto.FuncionarioDTO;
 import com.estudo.pontointeligente.entities.Funcionario;
 import com.estudo.pontointeligente.respositories.FuncionarioRepository;
-import com.estudo.pontointeligente.services.impl.FuncionarioServiceImpl;
-import com.estudo.pontointeligente.utils.DTOUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +14,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @RunWith(SpringRunner.class)
@@ -41,25 +37,25 @@ public class FuncionarioServiceTest {
 
     @Test
     public void testPersistirFuncioario() {
-        Funcionario funcionario = DTOUtils.build().dtoToFuncionario(this.funcionarioService.save(new FuncionarioDTO()));
+        Funcionario funcionario = this.funcionarioService.save(new Funcionario());
         Assert.assertNotNull(funcionario);
     }
 
     @Test
     public void testFindFuncionarioById() {
-        Optional<FuncionarioDTO> funcionario = this.funcionarioService.findById(1L);
+        Optional<Funcionario> funcionario = this.funcionarioService.findById(1L);
         Assert.assertTrue(funcionario.isPresent());
     }
 
     @Test
     public void testFindFuncioarioByCpf() {
-        Optional<FuncionarioDTO> funcionario = this.funcionarioService.findByCpf("24291173474");
+        Optional<Funcionario> funcionario = this.funcionarioService.findByCpf("24291173474");
         Assert.assertTrue(funcionario.isPresent());
     }
 
     @Test
     public void testFindFuncionarioByEmail() {
-        Optional<FuncionarioDTO> funcioario = this.funcionarioService.findByEmail("email@exemplo.com");
+        Optional<Funcionario> funcioario = this.funcionarioService.findByEmail("email@exemplo.com");
         Assert.assertTrue(funcioario.isPresent());
     }
 

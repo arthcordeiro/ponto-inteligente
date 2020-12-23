@@ -1,6 +1,6 @@
 package com.estudo.pontointeligente.services;
 
-import com.estudo.pontointeligente.dto.LancamentoDTO;
+import com.estudo.pontointeligente.entities.Lancamento;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
@@ -13,30 +13,30 @@ public interface LancamentoService {
      *
      * @param funcionarioId
      * @param pageRequest
-     * @return Page<LancamentoDTO>
+     * @return Page<Lancamento>
      */
-    Page<LancamentoDTO> findByFuncionarioId(Long funcionarioId, PageRequest pageRequest);
+    Page<Lancamento> findByFuncionarioId(Long funcionarioId, PageRequest pageRequest);
 
     /**
      * Busca lançamento por ID
      *
      * @param id
-     * @return Optional<LancamentoDTO>
+     * @return Optional<Lancamento>
      */
-    Optional<LancamentoDTO> findById(Long id);
+    Optional<Lancamento> findById(Long id);
 
     /**
      * Salva um novo lançamento
      *
-     * @param lancamentoDTO
-     * @return LancamentoDTO
+     * @param lancamento
+     * @return Lancamento
      */
-    LancamentoDTO save(LancamentoDTO lancamentoDTO);
+    Lancamento save(Lancamento lancamento);
 
     /**
      * Remove um lançamento
      *
-     * @param lancamentoDTO
+     * @param lancamento
      */
-    void delete(LancamentoDTO lancamentoDTO);
+    void delete(Lancamento lancamento);
 }

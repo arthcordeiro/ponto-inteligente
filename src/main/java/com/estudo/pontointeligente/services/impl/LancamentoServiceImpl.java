@@ -1,11 +1,8 @@
 package com.estudo.pontointeligente.services.impl;
 
-import com.estudo.pontointeligente.dto.FuncionarioDTO;
-import com.estudo.pontointeligente.dto.LancamentoDTO;
 import com.estudo.pontointeligente.entities.Lancamento;
 import com.estudo.pontointeligente.respositories.LancamentoRepository;
 import com.estudo.pontointeligente.services.LancamentoService;
-import com.estudo.pontointeligente.utils.DTOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,28 +20,27 @@ public class LancamentoServiceImpl implements LancamentoService {
     private LancamentoRepository lancamentoRepository;
 
     @Override
-    public Page<LancamentoDTO> findByFuncionarioId(Long funcionarioId, PageRequest pageRequest) {
+    public Page<Lancamento> findByFuncionarioId(Long funcionarioId, PageRequest pageRequest) {
         log.info("Buscando lançamentos pelo id do funcionario {}", funcionarioId);
-        return DTOUtils.build().toPageLancamentoDto(this.lancamentoRepository.findByFuncionarioId(funcionarioId, pageRequest));
+        return this.lancamentoRepository.findByFuncionarioId(funcionarioId, pageRequest);
     }
 
     @Override
-    public Optional<LancamentoDTO> findById(Long id) {
+    public Optional<Lancamento> findById(Long id) {
         log.info("Buscando lançamento pelo Id {}", id);
-        return Optional.ofNullable(DTOUtils.build().lancamentoToDto(this.lancamentoRepository.findById(id).get()));
+        return this.lancamentoRepository.findById(id);
     }
 
     @Override
-    public LancamentoDTO save(LancamentoDTO lancamentoDTO) {
-        log.info("Registrando um lançamento no banco {}", lancamentoDTO);
-        Lancamento retorno = this.lancamentoRepository
-                .save(DTOUtils.build().dtoToLancamento(lancamentoDTO));
-        return DTOUtils.build().lancamentoToDto(retorno);
+    public Lancamento save(Lancamento lancamento) {
+        log.info("Registrando um lançamento no banco {}", lancamento);
+        return this.lancamentoRepository
+                .save(lancamento);
     }
 
     @Override
-    public void delete(LancamentoDTO lancamentoDTO) {
-        log.info("Removendo o lançamento {}", lancamentoDTO);
-        this.lancamentoRepository.delete(DTOUtils.build().dtoToLancamento(lancamentoDTO));
+    public void delete(Lancamento lancamento) {
+        log.info("Removendo o lançamento {}", lancamento);
+        this.lancamentoRepository.delete(lancamento);
     }
 }
