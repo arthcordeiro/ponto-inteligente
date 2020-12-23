@@ -34,6 +34,14 @@ public class CadastroPJController {
 
     public CadastroPJController() {}
 
+    /**
+     * Endpoint de cadastro de pessoa Juridica
+     *
+     * @param cadastroPj
+     * @param result
+     * @return ResponseEntity<ResponseDTO<CadastroPJDTO>>
+     * @throws NoSuchAlgorithmException
+     */
     @PostMapping
     public ResponseEntity<ResponseDTO<CadastroPJDTO>> cadastrar(@Valid @RequestBody CadastroPJDTO cadastroPj, BindingResult result) throws NoSuchAlgorithmException {
         log.info("Cadastrando PJ: {}", cadastroPj.getCnpj());
@@ -57,6 +65,12 @@ public class CadastroPJController {
         return ResponseEntity.status(201).body(response);
     }
 
+    /**
+     * Validação dos dados se existe no banco
+     *
+     * @param cadastroPJDTO
+     * @param bindingResult
+     */
     private void validaDadosExistentes(CadastroPJDTO cadastroPJDTO, BindingResult bindingResult) {
         this.empresaService.findByCnpj(cadastroPJDTO.getCnpj()).ifPresent(empresa ->
                 bindingResult.addError(new ObjectError("empresa", "Empresa já cadastrada.")));
