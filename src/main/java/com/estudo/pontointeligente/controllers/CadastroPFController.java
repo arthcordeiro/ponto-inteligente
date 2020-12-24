@@ -79,8 +79,8 @@ public class CadastroPFController {
      */
     private void validaDadosExistentes(CadastroPFDTO cadastroPFDTO, BindingResult result) {
         Optional<Empresa> empresa = this.empresaService.findByCnpj(cadastroPFDTO.getCnpj());
-        if (empresa.isPresent())
-            result.addError(new ObjectError("empresa", "Empresa já cadastrada."));
+        if (!empresa.isPresent())
+            result.addError(new ObjectError("empresa", "Empresa não cadastrada."));
 
         this.funcionarioService.findByCpf(cadastroPFDTO.getCpf())
                 .ifPresent(error -> result.addError(new ObjectError("funcionario", "CPF Funcionario já cadastrado.")));
