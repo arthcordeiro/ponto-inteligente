@@ -25,6 +25,12 @@ public class EmpresaController {
 
     public EmpresaController() {}
 
+    /**
+     * Endpoint de consulta de empresa
+     *
+     * @param cnpj
+     * @return ResponseEntity<ResponseDTO<EmpresaDTO>>
+     */
     @GetMapping(value = "/cnpj/{cnpj}")
     public ResponseEntity<ResponseDTO<EmpresaDTO>> findByCnpj(@PathVariable("cnpj") String cnpj) {
         log.info("Buscando empresa pelo CNPJ: {}", cnpj);
